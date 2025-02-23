@@ -26,7 +26,6 @@ const corsOptions = {
 app.use(cors(corsOptions));
 app.use(bodyParser.json());
 
-console.log("API key:", process.env.GOOGLE_CLOUD_API_KEY);
 
 const genAI = new GoogleGenerativeAI(process.env.GOOGLE_CLOUD_API_KEY);
 
@@ -45,6 +44,10 @@ app.post("/api/generate-suggestions", async (req, res) => {
     console.error("Erreur lors de la génération des suggestions :", error);
     res.status(500).json({ error: "Erreur lors de la génération des suggestions" });
   }
+});
+
+app.get("/api/models", async (req, res) => {
+    console.log("Getting models");
 });
 
 app.listen(port, () => {
